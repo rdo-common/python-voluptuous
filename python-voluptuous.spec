@@ -3,7 +3,7 @@
 
 Name: python-%{upname}
 Version: 0.8.5
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A Python data validation library
 License: BSD
 Group: Development/Languages
@@ -75,6 +75,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.5-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Tue Jul 22 2014 Sergio Pascual <sergiopr@fedoraproject.org> - 0.8.5-2
 - Use tarball from github
 - Add COPYING to doc
