@@ -1,80 +1,68 @@
 
-%global upname voluptuous
+%global srcname voluptuous
 
-Name: python-%{upname}
-Version: 0.8.5
-Release: 3%{?dist}
+Name: python-%{srcname}
+Version: 0.8.8
+Release: 1%{?dist}
 Summary: A Python data validation library
 License: BSD
 Group: Development/Languages
 URL: http://github.com/alecthomas/voluptuous
-# The tarball from pypi has missing files (COPYING)
-# Use the tarball from github instead
-#Source0: http://pypi.python.org/packages/source/v/voluptuous/%{upname}-%{version}.tar.gz
-Source0: http://github.com/alecthomas/voluptuous/archive/%{version}.tar.gz#/%{upname}-%{version}.tar.gz
-BuildRequires: python2-devel python-setuptools
+Source0: http://pypi.python.org/packages/source/v/voluptuous/%{srcname}-%{version}.tar.gz
 
 BuildArch: noarch
-%if 0%{?with_python3}
-BuildRequires:  python3-devel python3-setuptools
-%endif # if with_python3
+BuildRequires: python2-devel python3-devel
 
 %description
 Voluptuous, despite the name, is a Python data validation library. It is 
 primarily intended for validating data coming into Python as JSON, YAML, etc.
 
-%if 0%{?with_python3}
-%package -n python3-%{upname}
-Summary: A Python data validation library
 
-%description -n python3-%{upname}
+%package -n python2-%{srcname}
+Summary: A Python data validation library
+BuildRequires:  python2-devel python-setuptools
+%{?python_provide:%python_provide python2-%{srcname}}
+
+%description -n python2-%{srcname}
 Voluptuous, despite the name, is a Python data validation library. It is 
 primarily intended for validating data coming into Python as JSON, YAML, etc.
 
-%endif # with_python3
+%package -n python3-%{srcname}
+Summary: A Python data validation library
+BuildRequires:  python3-devel python3-setuptools
+%{?python_provide:%python_provide python3-%{srcname}}
+
+%description -n python3-%{srcname}
+Voluptuous, despite the name, is a Python data validation library. It is 
+primarily intended for validating data coming into Python as JSON, YAML, etc.
 
 %prep
-%setup -q -n %{upname}-%{version}
-rm -rf %{upname}.egg-info
-
-%if 0%{?with_python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
-%endif # with_python3
-
-find -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python2}|'
+%autosetup -n %{srcname}-%{version}
 
 %build
-%{__python2} setup.py build
-
-%if 0%{?with_python3}
-pushd %{py3dir}
-%{__python3} setup.py build
-popd
-%endif # with_python3
+%py2_build
+%py3_build
 
 %install
+%py2_install
+%py3_install
 
-%if 0%{?with_python3}
-pushd %{py3dir}
-%{__python3} setup.py install -O1 --skip-build --root  %{buildroot}
-popd
-%endif # with_python3
-
-%{__python2} setup.py install -O1 --skip-build --root  %{buildroot}
-
-%files
-%doc README.md COPYING
+%files -n python2-%{srcname}
+%doc README.md
+%license COPYING
 %{python2_sitelib}/*
 
-%if 0%{?with_python3}
-%files -n python3-%{upname}
-%doc README.md COPYING
+%files -n python3-%{srcname}
+%doc README.md
+%license COPYING
 %{python3_sitelib}/*
-%endif # with_python3
 
 %changelog
+* Mon Dec 21 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.8.8-1
+- New upstream source
+- Use new python macros
+- Enable python3, fixes bz #1292616
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.5-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
