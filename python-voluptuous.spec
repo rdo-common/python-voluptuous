@@ -2,13 +2,13 @@
 %global srcname voluptuous
 
 Name: python-%{srcname}
-Version: 0.8.8
-Release: 2%{?dist}
+Version: 0.8.11
+Release: 1%{?dist}
 Summary: A Python data validation library
 License: BSD
 Group: Development/Languages
 URL: http://github.com/alecthomas/voluptuous
-Source0: http://pypi.python.org/packages/source/v/voluptuous/%{srcname}-%{version}.tar.gz
+Source0: https://pypi.io/packages/source/v/voluptuous/%{srcname}-%{version}.tar.gz
 
 BuildArch: noarch
 BuildRequires: python2-devel python3-devel
@@ -58,6 +58,9 @@ primarily intended for validating data coming into Python as JSON, YAML, etc.
 %{python3_sitelib}/*
 
 %changelog
+* Wed Jul 13 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.8.11-1
+- New upstream source (0.8.11)
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.8.8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
