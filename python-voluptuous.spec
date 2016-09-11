@@ -1,9 +1,12 @@
+%if 0%{?fedora}
+%global with_python3 1
+%endif
 
 %global upname voluptuous
 
 Name: python-%{upname}
-Version: 0.8.5
-Release: 3%{?dist}
+Version: 0.8.8
+Release: 1%{?dist}
 Summary: A Python data validation library
 License: BSD
 Group: Development/Languages
@@ -75,6 +78,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Wed Jan 20 2016 Haïkel Guémar <hguemar@fedoraproject.org> - 0.8.8-1
+- Upstream 0.8.8
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.5-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
