@@ -5,7 +5,7 @@
 %global upname voluptuous
 
 Name: python-%{upname}
-Version: 0.8.8
+Version: 0.8.9
 Release: 1%{?dist}
 Summary: A Python data validation library
 License: BSD
@@ -78,6 +78,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Sun Sep 11 2016 Haïkel Guémar <hguemar@fedoraproject.org> - 0.8.9-1
+- Upstream 0.8.9
+
 * Wed Jan 20 2016 Haïkel Guémar <hguemar@fedoraproject.org> - 0.8.8-1
 - Upstream 0.8.8
 
