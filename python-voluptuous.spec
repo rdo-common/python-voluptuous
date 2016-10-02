@@ -2,8 +2,8 @@
 %global srcname voluptuous
 
 Name: python-%{srcname}
-Version: 0.8.11
-Release: 2%{?dist}
+Version: 0.9.3
+Release: 1%{?dist}
 Summary: A Python data validation library
 License: BSD
 Group: Development/Languages
@@ -58,6 +58,9 @@ primarily intended for validating data coming into Python as JSON, YAML, etc.
 %{python3_sitelib}/*
 
 %changelog
+* Sun Oct 02 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.9.3-1
+- New upstream source (0.9.3)
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.11-2
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
