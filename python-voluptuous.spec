@@ -3,7 +3,7 @@
 
 Name: python-%{srcname}
 Version: 0.9.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A Python data validation library
 License: BSD
 Group: Development/Languages
@@ -58,6 +58,9 @@ primarily intended for validating data coming into Python as JSON, YAML, etc.
 %{python3_sitelib}/*
 
 %changelog
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.3-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 0.9.3-3
 - Rebuild for Python 3.6
 
