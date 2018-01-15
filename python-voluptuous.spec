@@ -1,6 +1,10 @@
 
 %global srcname voluptuous
 
+%if 0%{?fedora}
+%global with_python3 1
+%endif
+
 Name: python-%{srcname}
 Version: 0.10.5
 Release: 2%{?dist}
@@ -11,7 +15,10 @@ URL: http://github.com/alecthomas/voluptuous
 Source0: https://pypi.io/packages/source/v/voluptuous/%{srcname}-%{version}.tar.gz
 
 BuildArch: noarch
-BuildRequires: python2-devel python3-devel
+BuildRequires: python2-devel
+%if 0%{?with_python3}
+BuildRequires:  python3-devel
+%endif # if with_python3
 
 %description
 Voluptuous, despite the name, is a Python data validation library. It is 
@@ -27,6 +34,7 @@ BuildRequires:  python2-devel python-setuptools
 Voluptuous, despite the name, is a Python data validation library. It is 
 primarily intended for validating data coming into Python as JSON, YAML, etc.
 
+%if 0%{?with_python3}
 %package -n python3-%{srcname}
 Summary: A Python data validation library
 BuildRequires:  python3-devel python3-setuptools
@@ -35,29 +43,39 @@ BuildRequires:  python3-devel python3-setuptools
 %description -n python3-%{srcname}
 Voluptuous, despite the name, is a Python data validation library. It is 
 primarily intended for validating data coming into Python as JSON, YAML, etc.
+%endif # with_python3
 
 %prep
 %autosetup -n %{srcname}-%{version}
 
 %build
 %py2_build
+%if 0%{?with_python3}
 %py3_build
+%endif # with_python3
 
 %install
 %py2_install
+%if 0%{?with_python3}
 %py3_install
+%endif # with_python3
 
 %files -n python2-%{srcname}
 %doc README.md
 %license COPYING
 %{python2_sitelib}/*
 
+%if 0%{?with_python3}
 %files -n python3-%{srcname}
 %doc README.md
 %license COPYING
 %{python3_sitelib}/*
+%endif # with_python3
 
 %changelog
+* Mon Jan 15 2018 Alfredo Moralejo <amoralej@redhat.com> - 0.10.5
+- Added conditional to disable python3 builds in CentOS imports.
+
 * Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.10.5-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
